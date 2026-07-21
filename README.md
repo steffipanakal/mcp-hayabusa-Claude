@@ -31,7 +31,7 @@ This detects your OS/architecture, pulls the latest release from `Yamato-Securit
 {
   "mcpServers": {
     "hayabusa": {
-      "command": "C:/Users/steff/Desktop/AICyberDefenseOps/mcp-hayabusa/.venv/Scripts/python.exe",
+      "command": "C:********************.venv/Scripts/python.exe",
       "args": ["server.py"]
     }
   }
