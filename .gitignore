@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.pyc
+
+# Downloaded by scripts/download_hayabusa.py
+hayabusa/*.exe
+hayabusa/rules/
+hayabusa/config/
+
+# Scratch output from manual scans
+*.jsonl
+logs/
+
+# Personal, per-user Claude Code settings
+.claude/settings.local.json
