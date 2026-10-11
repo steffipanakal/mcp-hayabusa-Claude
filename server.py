@@ -16,7 +16,8 @@ SCAN_TIMEOUT_SECONDS = 600
 
 # Hayabusa's --min-level flag takes full words, but its JSON "Level" field is
 # abbreviated by default (info/low/med/high/crit) - both spellings must map to
-# the same rank so a caller can pass either.
+# the same rank so a caller can pass either, and findings are rewritten to the
+# full names on the way out.
 SEVERITY_RANK = {
     "informational": 0,
     "info": 0,
@@ -129,7 +130,10 @@ def scan_evtx(evtx_path: str, min_severity: str | None = None) -> dict:
                     if not line:
                         continue
                     record = json.loads(line)
-                    if SEVERITY_RANK.get(str(record.get("Level", "")).lower(), -1) >= min_rank:
+                    rank = SEVERITY_RANK.get(str(record.get("Level", "")).lower(), -1)
+                    if rank >= min_rank:
+                        # Report levels with the same full names min_severity accepts
+                        record["Level"] = SEVERITY_CANONICAL[rank]
                         findings.append(record)
 
     return {
